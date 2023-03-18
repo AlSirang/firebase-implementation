@@ -12,11 +12,18 @@ const useFirebaseAuth = () => {
     if (!isInit.current) {
       isInit.current = true;
       onAuthenticationStateChange((user) => {
-        if (user === null) {
-          setUserState(null);
-          const path = Router.pathname;
-          if (!/signup/.test(path)) Router.push("/");
+        if (user !== null) {
+          const userObj = {
+            uid: user.uid,
+            email: user.email,
+          };
+
+          setUserState(userObj);
+          return;
         }
+        Router.push({ pathname: "/" });
+
+        setUserState(null);
       });
     }
   }, [setUserState]);

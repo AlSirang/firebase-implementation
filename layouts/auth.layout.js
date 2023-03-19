@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
         <title>Firebase - auth</title>
       </Head>
 
-      <main className="min-h-[100vh] h-full flex flex-col justify-center">
+      <main className="min-h-[80vh] h-full flex flex-col justify-center">
         {children}
       </main>
     </>

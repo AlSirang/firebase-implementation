@@ -26,7 +26,7 @@ export default function Header() {
               <div>
                 <button
                   onClick={onSignout}
-                  className="rounded border border-indigo-600 py-1 px-5 text-sm font-semibold text-indigo-600 md:hover:bg-indigo-50"
+                  className="rounded border border-gray-400 px-10  md:hover:bg-gray py-1 text-sm font-semibold text-gray400 md:hover:bg-gray-50"
                 >
                   Sign Out
                 </button>

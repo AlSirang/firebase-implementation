@@ -1,5 +1,4 @@
 import Head from "next/head";
-import useFirebaseAuth from "@/hooks/useFirebaseAuth";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
@@ -7,7 +6,6 @@ import Router from "next/router";
 
 const Layout = ({ children }) => {
   const user = useRecoilValue(userState);
-
   useEffect(() => {
     if (user) {
       Router.push({

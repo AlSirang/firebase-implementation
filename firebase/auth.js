@@ -7,7 +7,8 @@ import {
 } from "firebase/auth";
 import { firebaseApp } from "./config";
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
+
 export const onAuthenticationStateChange = async (cb = () => null) => {
   onAuthStateChanged(auth, cb);
 };

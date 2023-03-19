@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import userState from "@/recoil/user";
 import UserLayout from "@/layouts/user.layout";
-import Image from "next/image";
-import Link from "next/link";
-import defaultProfilePic from "@/images/avatar.png";
 import { getUserDoc, updateUsersEntries } from "@/firebase/profile";
 import { uploadProfilePicture } from "@/firebase/file-uploads";
+import defaultProfilePic from "@/images/avatar.png";
 
 export default function ProfileIndex() {
   const user = useRecoilValue(userState);
@@ -20,7 +19,6 @@ export default function ProfileIndex() {
     const file = event.target.files[0];
 
     try {
-      console.log(file);
       if (
         file &&
         ["image/png", "image/jpg", "image/jpeg"].includes(file.type)

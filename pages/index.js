@@ -14,7 +14,6 @@ export default function Index() {
         email,
         password,
       });
-      console.log({ user });
     } catch (err) {
       console.log(err);
     }

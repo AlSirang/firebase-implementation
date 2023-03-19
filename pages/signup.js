@@ -2,6 +2,7 @@ import Link from "next/link";
 import AuthForm from "@/components/auth-form";
 import AuthLayout from "@/layouts/auth.layout";
 import { firebaseSignUpWithEmailAndPassword } from "@/firebase/auth";
+import { setUserDoc } from "@/firebase/profile";
 
 export default function Index() {
   const onSubmit = async (event) => {
@@ -10,10 +11,13 @@ export default function Index() {
       const form = new FormData(event.target);
       const email = form.get("email");
       const password = form.get("password");
-      const user = await firebaseSignUpWithEmailAndPassword({
+      const { user } = await firebaseSignUpWithEmailAndPassword({
         email,
         password,
       });
+      const uid = user.uid;
+
+      await setUserDoc({ uid });
     } catch (err) {
       console.log(err);
     }

@@ -6,6 +6,7 @@ import UserLayout from "@/layouts/user.layout";
 import { getUserDoc, updateUsersEntries } from "@/firebase/profile";
 import { uploadProfilePicture } from "@/firebase/file-uploads";
 import defaultProfilePic from "@/images/avatar.png";
+import ImagesGrid from "@/components/images-grid";
 
 export default function ProfileIndex() {
   const user = useRecoilValue(userState);
@@ -46,41 +47,44 @@ export default function ProfileIndex() {
   return (
     <UserLayout className="w-full">
       <div className="mb-10 py-10 bg-white rounded-sm shadow relative">
-        <div className="absolute right-10">
-          <Link
-            href="profile/edit"
-            className="border border-gray-400 px-10 rounded md:hover:bg-gray"
-          >
-            Edit
-          </Link>
-        </div>
         <div className="flex items-center flex-col">
-          <div className="rounded-full overflow-hidden bg-black max-w-[150px] max-h-[150px] h-full w-full relative">
-            <picture>
-              <img
-                src={userDoc?.profilePicture || defaultProfilePic.src}
-                alt="profile"
-                className="rounded-full"
-              />
-            </picture>
-
-            <div className="opacity-0 hover:opacity-100 absolute left-0 right-0 top-0 bottom-0 bg-[#ffffff99] transition-all">
-              <div className="w-full h-full flex items-center justify-center">
-                <button
-                  className="w-full h-full text-[1.4rem] "
-                  onClick={onProfileImageClick}
-                >
-                  Edit
-                </button>
-
-                <input
-                  ref={inputRef}
-                  type="file"
-                  className="hidden"
-                  onChange={onInputChange}
+          <div className="pt-9">
+            <div className="rounded-full overflow-hidden bg-black max-w-[150px] max-h-[150px] h-full w-full relative">
+              <picture>
+                <img
+                  src={userDoc?.profilePicture || defaultProfilePic.src}
+                  alt="profile"
+                  className="rounded-full"
                 />
+              </picture>
+
+              <div className="opacity-0 hover:opacity-100 absolute left-0 right-0 top-0 bottom-0 bg-[#ffffff99] transition-all">
+                <div className="w-full h-full flex items-center justify-center">
+                  <button
+                    className="w-full h-full text-[1.4rem] "
+                    onClick={onProfileImageClick}
+                  >
+                    Edit
+                  </button>
+
+                  <input
+                    ref={inputRef}
+                    type="file"
+                    className="hidden"
+                    onChange={onInputChange}
+                  />
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="absolute  right-10 z-50">
+            <Link
+              href="profile/edit"
+              className="border border-gray-400 px-10 rounded md:hover:bg-gray"
+            >
+              Edit
+            </Link>
           </div>
           <div className="w-full flex justify-center px-4 py-3 ">
             <div className="text-center mt-5">
@@ -90,6 +94,8 @@ export default function ProfileIndex() {
           </div>
         </div>
       </div>
+
+      <ImagesGrid uid={user?.uid} />
     </UserLayout>
   );
 }

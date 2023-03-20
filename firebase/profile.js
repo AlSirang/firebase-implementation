@@ -37,7 +37,7 @@ export const updateImagesEntries = async ({ uid, url, isUpdate = [] }) => {
       urls: arrayUnion(url),
     });
 
-  return updateDoc(imageRef, {
+  return setDoc(imageRef, {
     urls: arrayUnion(url),
   });
 };

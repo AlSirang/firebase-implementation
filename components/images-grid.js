@@ -8,7 +8,7 @@ export default function ImagesGrid({ uid }) {
     uid &&
       getImages(uid)
         .then((doc) => {
-          setUrls(doc?.urls || []);
+          setUrls(doc?.urls.reverse() || []);
         })
         .catch((err) => {
           console.log({ err });
@@ -37,6 +37,8 @@ export default function ImagesGrid({ uid }) {
           isUpdate: Boolean(urls.length),
         });
         fileInputRef.current.value = null;
+
+        setUrls((prev) => [url, ...prev]);
       }
     } catch (err) {
       console.log(err);

@@ -8,7 +8,9 @@ const Layout = ({ className = "max-w-7xl w-full m-auto", children }) => {
         <title>Firebase</title>
       </Head>
       <Header />
-      <main className={`${className} bg-gray-100`}>{children}</main>
+      <main className="bg-gray-100">
+        <div className={className}>{children}</div>
+      </main>
     </>
   );
 };

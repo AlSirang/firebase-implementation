@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { firebaseDB } from "./config";
 
 /// creates a new empty user document
@@ -27,4 +27,24 @@ export const getUserDoc = async (uid) => {
 export const updateUsersEntries = async ({ uid, payload }) => {
   const userRef = doc(firebaseDB, "users", uid);
   await updateDoc(userRef, payload);
+};
+
+export const updateImagesEntries = async ({ uid, url, isUpdate = [] }) => {
+  const imageRef = doc(firebaseDB, "images", uid);
+
+  if (isUpdate)
+    return updateDoc(imageRef, {
+      urls: arrayUnion(url),
+    });
+
+  return updateDoc(imageRef, {
+    urls: arrayUnion(url),
+  });
+};
+
+export const getImages = async (uid) => {
+  const docRef = doc(firebaseDB, "images", uid);
+
+  const docSnap = await getDoc(docRef);
+  return docSnap?.data();
 };
